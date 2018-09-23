@@ -21,7 +21,7 @@
 	        <div class="container">
 	            <div class="login-content">
 	                <div class="login-logo">
-	                    <a href="index.html">
+	                    <a href="#">
 	                        <?=$pageHeader?><br>
 	                        PT. Aneka Mitra Gemilang
 	                    </a>

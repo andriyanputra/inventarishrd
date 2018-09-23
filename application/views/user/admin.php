@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?=base_url('assets/css/font-awesome.min.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/css/themify-icons.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/css/flag-icon.min.css')?>">
+    <link rel="stylesheet" href="<?=base_url('assets/css/lib/datatable/dataTables.bootstrap.min.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/css/cs-skin-elastic.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/scss/style.css')?>">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel='stylesheet' type='text/css'>
@@ -25,9 +26,7 @@
 
 </head>
 <body onLoad="setInterval('real_time()', 1000);">
-
-
-        <!-- Left Panel -->
+    <!-- Left Panel -->
 
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -43,21 +42,21 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <a href="<?=base_url('user/admin')?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-folder"></i>Master</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-badge"></i><a href="ui-buttons.html">User</a></li>
-                            <li><i class="fa fa-shopping-cart"></i><a href="ui-badges.html">Barang</a></li>
-                            <li><i class="fa fa-truck"></i><a href="ui-tabs.html">Supplier</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="<?=base_url('user/user');?>">User</a></li>
+                            <li><i class="fa fa-shopping-cart"></i><a href="<?=base_url('user/admin/barang');?>">Barang</a></li>
+                            <li><i class="fa fa-truck"></i><a href="<?=base_url('user/supplier');?>">Supplier</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Transaksi</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">Peminjaman</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">Pengembalian</a></li>
+                            <li><i class="fa fa-table"></i><a href="<?=base_url('user/transaksi/peminjaman')?>">Peminjaman</a></li>
+                            <li><i class="fa fa-table"></i><a href="<?=base_url('user/transaksi/pengembalian')?>">Pengembalian</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -105,7 +104,6 @@
                     </div>
                 </div>
             </div>
-
         </header><!-- /header -->
         <!-- Header-->
 
@@ -142,8 +140,8 @@
             </div>
 
 
-            <div class="col-sm-6 col-lg-3">
-                
+            <div class="col-sm-12">
+                <?php (isset($pageContent)) ? $this->load->view($pageContent) : '' ?>
             </div>
             <!--/.col-->
         </div> <!-- .content -->
@@ -180,12 +178,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="<?=base_url('assets/js/plugins.js')?>"></script>
     <script src="<?=base_url('assets/js/main.js')?>"></script>
-
-
-    <!--<script src="<?=base_url('assets/js/lib/chart-js/Chart.bundle.js')?>"></script>-->
     <script src="<?=base_url('assets/js/dashboard.js')?>"></script>
     <script src="<?=base_url('assets/js/widgets.js')?>"></script>
+
+    <!-- Data Tables-->
+    <script src="<?=base_url('assets/js/lib/data-table/datatables.min.js')?>"></script>
+    <script src="<?=base_url('assets/js/lib/data-table/dataTables.bootstrap.min.js')?>"></script>
+    <script src="<?=base_url('assets/js/lib/data-table/dataTables.buttons.min.js')?>"></script>
+    <script src="<?=base_url('assets/js/lib/data-table/buttons.bootstrap.min.js')?>"></script>
+    <script src="<?=base_url('assets/js/lib/data-table/jszip.min.js')?>"></script>
+    <script src="<?=base_url('assets/js/lib/data-table/pdfmake.min.js')?>"></script>
+    <script src="<?=base_url('assets/js/lib/data-table/vfs_fonts.js')?>"></script>
+    <script src="<?=base_url('assets/js/lib/data-table/buttons.html5.min.js')?>"></script>
+    <script src="<?=base_url('assets/js/lib/data-table/buttons.print.min.js')?>"></script>
+    <script src="<?=base_url('assets/js/lib/data-table/buttons.colVis.min.js')?>"></script>
+    <script src="<?=base_url('assets/js/lib/data-table/datatables-init.js')?>"></script>
+
     <script language=javascript>
+        $(document).ready(function() {
+          $('#data-user').DataTable();
+        } );
+
         function showTime() {
             var a_p = "";
             var today = new Date();
@@ -218,14 +231,14 @@
         setInterval(showTime, 500);
 
         var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-        var hari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']
+        var hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
         var date = new Date();
         var day = date.getDate();
         var dino = date.getDay();
         var month = date.getMonth();
         var year = date.getFullYear();
          
-        document.getElementById("date").innerHTML =hari[dino] + ", " + day + " " + months[month] + " " + year;
+        document.getElementById("date").innerHTML = hari[dino] + ", " + day + " " + months[month] + " " + year;
     </script>
 
 </body>

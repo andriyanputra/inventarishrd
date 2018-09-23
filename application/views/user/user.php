@@ -1,36 +1,41 @@
-<h3><?=$pageHeader?></h3>
-<form action="<?=base_url('user/user/cari')?>" method="get">
-	<input type="text" placeholder="Cari Disini" name="cari">
-	<input type="submit" value="Cari">
-</form>
-<button class="btn btn-success float-right" data-toggle="modal" data-target="#tambahBrg" style="margin-top: -45px; margin-bottom: 5px"><i class="fa fa-plus-circle"></i> Tambah User</button>
-<?=$this->session->flashdata('fail')?>
-<table class="table table-hover table-responsive" style="width: 100%">
-	<thead class="bg-accent">
-		<th>No</th>
-		<th>ID</th>
-		<th width="300">Nama</th>
-		<th>Username</th>
-		<th>Akses</th>
-		<th width="100">Aksi</th>
-	</thead>
-	<tbody>
-		<?php $no=1;foreach ($user as $b): ?>
-		<tr>
-			<td><?=$no++?></td>
-			<td><?=$b->id_user?></td>
-			<td><?=$b->nama?></td>
-			<td><?=$b->username?></td>
-			<td><?=($b->level==1)?'Administrator':'Kepksek Sarpras'?></td>
-			<td class="btn-group">
-				<a href="#" title="Edit User" data-action="<?=base_url('user/user/edit')?>" data-kode="<?=$b->id_user?>" data-toggle="modal" data-target="#editu" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-				<a title="Hapus Supplier" href="<?=base_url("user/user/hapus/$b->id_user")?>" onclick="return confirm('Yakin akan menghapus supplier dipilih ?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-			</td>
-		</tr>
-		<?php endforeach ?>
-	</tbody>
-</table>
-<form action="<?=base_url('user/user/tambah')?>" method="post" class="modal" id="tambahBrg">
+	<div class="card">
+        <div class="card-header">
+            <strong class="card-title"><?=$pageHeader?></strong>
+            <button class="btn btn-success" data-toggle="modal" data-target="#tambahBrg"><i class="fa fa-plus-circle"></i> Tambah User</button>
+        </div>
+		<?=$this->session->flashdata('fail')?>
+
+        <div class="card-body">
+			<table id="bootstrap-data-table" class="table table-striped table-bordered">
+				<thead>
+					<th>No</th>
+					<th>ID</th>
+					<th width="300">Nama</th>
+					<th>Username</th>
+					<th>Akses</th>
+					<th width="100">Aksi</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  	<?php $no=1;foreach ($user as $b): ?>
+					  <tr>
+					    <td><?=$no++?></td>
+						<td><?=$b->id_user?></td>
+						<td><?=$b->nama?></td>
+						<td><?=$b->username?></td>
+						<td><?=($b->level==1)?'Administrator':'Kepksek Sarpras'?></td>
+						<td class="btn-group">
+							<a href="#" title="Edit User" data-action="<?=base_url('user/user/edit')?>" data-kode="<?=$b->id_user?>" data-toggle="modal" data-target="#editu" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+							<a title="Hapus Supplier" href="<?=base_url("user/user/hapus/$b->id_user")?>" onclick="return confirm('Yakin akan menghapus supplier dipilih ?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+						</td>
+					  </tr>
+					<?php endforeach ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<form action="<?=base_url('user/user/tambah')?>" method="post" class="modal" id="tambahBrg">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
